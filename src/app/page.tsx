@@ -43,6 +43,11 @@ export default function DoctorLandingPage() {
     null | (typeof services)[0]
   >(null);
 
+  // Watch Story modal state
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const openVideoModal = () => setIsVideoOpen(true);
+  const closeVideoModal = () => setIsVideoOpen(false);
+
   const testimonials = [
     {
       name: "Priya Sharma",
@@ -292,6 +297,30 @@ export default function DoctorLandingPage() {
           </div>
         </div>
       )}
+      {/* Modal for Watch Story */}
+      {isVideoOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-0 relative animate-fade-in overflow-hidden">
+            <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-blue-600 z-10"
+              onClick={closeVideoModal}
+              aria-label="Close video modal"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="aspect-w-16 aspect-h-9 w-full h-full">
+              {/* Replace the src with your own video or YouTube embed link */}
+              <iframe
+                src="video.mp4"
+                title="Dr. Riya's Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-96 rounded-b-2xl border-0"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-10 animate-pulse"></div>
@@ -407,7 +436,10 @@ export default function DoctorLandingPage() {
                   Book Consultation
                   <ArrowRight className="inline w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="group border-2 border-gray-300 text-gray-700 px-10 py-4 rounded-2xl font-semibold hover:border-blue-500 hover:text-blue-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-white/50">
+                <button
+                  className="group border-2 border-gray-300 text-gray-700 px-10 py-4 rounded-2xl font-semibold hover:border-blue-500 hover:text-blue-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm bg-white/50"
+                  onClick={openVideoModal}
+                >
                   <Play className="inline w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
                   Watch Story
                 </button>
