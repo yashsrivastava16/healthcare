@@ -162,7 +162,7 @@ export default function DoctorLandingPage() {
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Phone validation: must be exactly 10 digits
     const phoneValid = /^\d{10}$/.test(form.phone);
@@ -170,6 +170,12 @@ export default function DoctorLandingPage() {
       alert("Please enter a valid 10-digit phone number.");
       return;
     }
+    // Save appointment to file via API
+    await fetch("/api/appointments", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
     setFormStatus("success");
     setTimeout(() => {
       setIsModalOpen(false);
@@ -226,17 +232,24 @@ export default function DoctorLandingPage() {
                   placeholder="Email Address"
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
                 />
-                <input
-                  type="tel"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleFormChange}
-                  required
-                  placeholder="Phone Number"
-                  pattern="\\d{10}"
-                  maxLength={10}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
-                />
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 select-none">
+                    +91
+                  </span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleFormChange}
+                    required
+                    placeholder="Phone Number"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    className="w-full pl-14 pr-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                    inputMode="numeric"
+                    autoComplete="tel-national"
+                  />
+                </div>
                 <input
                   type="datetime-local"
                   name="date"
