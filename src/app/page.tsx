@@ -38,6 +38,11 @@ export default function DoctorLandingPage() {
   });
   const [formStatus, setFormStatus] = useState<"idle" | "success">("idle");
 
+  // Learn More modal state
+  const [selectedService, setSelectedService] = useState<
+    null | (typeof services)[0]
+  >(null);
+
   const testimonials = [
     {
       name: "Priya Sharma",
@@ -65,6 +70,64 @@ export default function DoctorLandingPage() {
     },
   ];
 
+  const services = [
+    {
+      icon: <Heart className="w-10 h-10 text-white" />,
+      title: "Comprehensive Health Checkups",
+      description:
+        "Complete wellness assessments with advanced diagnostics and personalized health insights.",
+      color: "from-pink-500 to-rose-500",
+      details:
+        "Our comprehensive health checkups include a full range of laboratory tests, physical examinations, and advanced screenings. You receive a personalized health report and actionable recommendations to help you stay ahead of potential health issues. Early detection and prevention are at the core of our approach, ensuring your long-term well-being.",
+    },
+    {
+      icon: <Activity className="w-10 h-10 text-white-500" />,
+      title: "Chronic Disease Management",
+      description:
+        "Expert management of diabetes, hypertension, and other chronic conditions with cutting-edge protocols.",
+      color: "from-emerald-500 to-teal-500",
+      details:
+        "We provide ongoing support and tailored treatment plans for chronic conditions such as diabetes, hypertension, and thyroid disorders. Our multidisciplinary approach combines medication management, lifestyle counseling, and regular monitoring to help you achieve optimal control and a better quality of life.",
+    },
+    {
+      icon: <Shield className="w-10 h-10 text-white-500" />,
+      title: "Preventive Medicine",
+      description:
+        "Proactive healthcare strategies including vaccinations, screenings, and lifestyle optimization.",
+      color: "from-blue-500 to-indigo-500",
+      details:
+        "Prevention is better than cure. We offer immunizations, cancer screenings, and risk assessments to help you avoid illness before it starts. Our team works with you to develop healthy habits and minimize risk factors, empowering you to take charge of your health.",
+    },
+    {
+      icon: <Users className="w-10 h-10 text-white-500" />,
+      title: "Family Medicine",
+      description:
+        "Comprehensive care for all family members, from pediatrics to geriatrics with specialized attention.",
+      color: "from-purple-500 to-violet-500",
+      details:
+        "From infants to seniors, we provide compassionate, continuous care for every member of your family. Our services include routine checkups, vaccinations, acute illness management, and age-appropriate screenings, all delivered with a personal touch.",
+    },
+  ];
+
+  const stats = [
+    {
+      number: "500+",
+      label: "Happy Patients",
+      icon: <Users className="w-8 h-8" />,
+    },
+    {
+      number: "3+",
+      label: "Years Experience",
+      icon: <Award className="w-8 h-8" />,
+    },
+    {
+      number: "98%",
+      label: "Success Rate",
+      icon: <CheckCircle className="w-8 h-8" />,
+    },
+    { number: "24/7", label: "Support", icon: <Clock className="w-8 h-8" /> },
+  ];
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
@@ -74,7 +137,7 @@ export default function DoctorLandingPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
@@ -108,55 +171,9 @@ export default function DoctorLandingPage() {
     }, 2000);
   };
 
-  const services = [
-    {
-      icon: <Heart className="w-10 h-10 text-pink-500" />,
-      title: "Comprehensive Health Checkups",
-      description:
-        "Complete wellness assessments with advanced diagnostics and personalized health insights.",
-      color: "from-pink-500 to-rose-500",
-    },
-    {
-      icon: <Activity className="w-10 h-10 text-emerald-500" />,
-      title: "Chronic Disease Management",
-      description:
-        "Expert management of diabetes, hypertension, and other chronic conditions with cutting-edge protocols.",
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: <Shield className="w-10 h-10 text-blue-500" />,
-      title: "Preventive Medicine",
-      description:
-        "Proactive healthcare strategies including vaccinations, screenings, and lifestyle optimization.",
-      color: "from-blue-500 to-indigo-500",
-    },
-    {
-      icon: <Users className="w-10 h-10 text-purple-500" />,
-      title: "Family Medicine",
-      description:
-        "Comprehensive care for all family members, from pediatrics to geriatrics with specialized attention.",
-      color: "from-purple-500 to-violet-500",
-    },
-  ];
-
-  const stats = [
-    {
-      number: "500+",
-      label: "Happy Patients",
-      icon: <Users className="w-8 h-8" />,
-    },
-    {
-      number: "3+",
-      label: "Years Experience",
-      icon: <Award className="w-8 h-8" />,
-    },
-    {
-      number: "98%",
-      label: "Success Rate",
-      icon: <CheckCircle className="w-8 h-8" />,
-    },
-    { number: "24/7", label: "Support", icon: <Clock className="w-8 h-8" /> },
-  ];
+  const openServiceModal = (service: (typeof services)[0]) =>
+    setSelectedService(service);
+  const closeServiceModal = () => setSelectedService(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-x-hidden">
@@ -239,6 +256,39 @@ export default function DoctorLandingPage() {
                 </button>
               </form>
             )}
+          </div>
+        </div>
+      )}
+      {/* Modal for Service Learn More */}
+      {selectedService && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-fade-in">
+            <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-blue-600"
+              onClick={closeServiceModal}
+              aria-label="Close modal"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="flex flex-col items-center text-center">
+              <div
+                className={`w-20 h-20 bg-gradient-to-r ${selectedService.color} rounded-2xl flex items-center justify-center mb-6`}
+              >
+                {selectedService.icon}
+              </div>
+              <h3 className="text-3xl font-bold mb-4 text-gray-900">
+                {selectedService.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                {selectedService.details}
+              </p>
+              <button
+                className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+                onClick={closeServiceModal}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -551,7 +601,17 @@ export default function DoctorLandingPage() {
                   <p className="text-gray-600 leading-relaxed mb-6">
                     {service.description}
                   </p>
-                  <div className="flex items-center text-blue-600 font-semibold group-hover:text-purple-600 transition-colors">
+                  <div
+                    className="flex items-center text-blue-600 font-semibold group-hover:text-purple-600 transition-colors cursor-pointer"
+                    onClick={() => openServiceModal(service)}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        openServiceModal(service);
+                    }}
+                    aria-label={`Learn more about ${service.title}`}
+                  >
                     Learn More
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
                   </div>
