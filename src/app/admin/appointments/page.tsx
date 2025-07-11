@@ -1,11 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-// function getTodayDateString() {
-//   const today = new Date();
-//   return today.toISOString().split("T")[0];
-// }
-
 type Appointment = {
   name: string;
   email: string;
@@ -55,15 +50,42 @@ export default function AdminAppointmentsPage() {
     }
   }, [dateFilter, appointments]);
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "drsecret2025") {
-      setAuthed(true);
-      setError("");
-    } else {
-      setError("Incorrect password");
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setAuthed(true);
+        setError("");
+        if (typeof window !== "undefined") {
+          localStorage.setItem("adminAuthed", "true");
+        }
+      } else {
+        setError("Incorrect password");
+      }
+    } catch {
+      setError("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // Auto-auth if session exists
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      localStorage.getItem("adminAuthed") === "true"
+    ) {
+      setAuthed(true);
+    }
+  }, []);
 
   const clearDateFilter = () => {
     setDateFilter("");
