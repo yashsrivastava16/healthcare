@@ -1,40 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
+import { MongoClient } from "mongodb";
 
-// Helper to read appointments
-async function readAppointments() {
-  try {
-    const data = await fs.readFile(DATA_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return [];
-  }
-}
+const uri = process.env.MONGODB_URI;
+const dbName = "drPortfolio";
+const collectionName = "appointments";
 
-// Helper to write appointments
-const DATA_FILE = process.cwd() + "/public/appointments.json";
-
-async function writeAppointments(appointments: any[]) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(appointments, null, 2), "utf-8");
+async function getCollection() {
+  const client = new MongoClient(uri);
+  await client.connect();
+  const db = client.db(dbName);
+  return { collection: db.collection(collectionName), client };
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const appointments = await readAppointments();
-  appointments.push(body);
-  await writeAppointments(appointments);
+  const { collection, client } = await getCollection();
+  await collection.insertOne(body);
+  await client.close();
   return NextResponse.json({ success: true });
 }
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const date = searchParams.get("date");
-  const appointments = await readAppointments();
-  let filtered = appointments;
+  const { collection, client } = await getCollection();
+  let query = {};
   if (date) {
-    filtered = appointments.filter(
-      (a: any) => a.date && a.date.startsWith(date)
-    );
+    query = { date: { $regex: `^${date}` } };
   }
-  return NextResponse.json(filtered);
+  const appointments = await collection.find(query).toArray();
+  await client.close();
+  return NextResponse.json(appointments);
 }
