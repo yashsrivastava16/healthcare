@@ -197,7 +197,7 @@ export default function DoctorLandingPage() {
       {/* Modal for Book Consultation */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-fade-in">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-xs sm:max-w-md w-full px-4 sm:px-8 py-8 relative animate-fade-in">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-blue-600"
               onClick={closeModal}
