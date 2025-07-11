@@ -37,7 +37,9 @@ export default function DoctorLandingPage() {
     date: "",
     message: "",
   });
-  const [formStatus, setFormStatus] = useState<"idle" | "success">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "loading">(
+    "idle"
+  );
 
   // Learn More modal state
   const [selectedService, setSelectedService] = useState<
@@ -175,6 +177,7 @@ export default function DoctorLandingPage() {
       alert("Please enter a valid 10-digit phone number.");
       return;
     }
+    setFormStatus("loading");
     // Save appointment to file via API
     await fetch("/api/appointments", {
       method: "POST",
@@ -273,9 +276,36 @@ export default function DoctorLandingPage() {
                 />
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+                  disabled={formStatus === "loading"}
                 >
-                  Book Now
+                  {formStatus === "loading" ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin h-5 w-5 mr-2 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8z"
+                        ></path>
+                      </svg>
+                      Booking...
+                    </span>
+                  ) : (
+                    "Book Now"
+                  )}
                 </button>
               </form>
             )}
