@@ -89,21 +89,21 @@ export default function DoctorLandingPage() {
     },
     {
       icon: <Activity className="w-10 h-10 text-white" />,
-      title: "Chronic Disease Management",
+      title: "Chronic Disease Management & PCOD/PCOS Care",
       description:
-        "Expert management of diabetes, hypertension, and other chronic conditions with cutting-edge protocols.",
+        "Expert management of diabetes, hypertension, PCOD/PCOS, and other chronic conditions with cutting-edge protocols.",
       color: "from-emerald-500 to-teal-500",
       details:
-        "We provide ongoing support and tailored treatment plans for chronic conditions such as diabetes, hypertension, and thyroid disorders. Our multidisciplinary approach combines medication management, lifestyle counseling, and regular monitoring to help you achieve optimal control and a better quality of life.",
+        "We provide ongoing support and tailored treatment plans for chronic conditions such as diabetes, hypertension, thyroid disorders, and PCOD/PCOS. Our multidisciplinary approach combines medication management, lifestyle counseling, and regular monitoring to help you achieve optimal control and a better quality of life.",
     },
     {
       icon: <Shield className="w-10 h-10 text-white" />,
-      title: "Preventive Medicine",
+      title: "Preventive Medicine & Weight Management",
       description:
-        "Proactive healthcare strategies including vaccinations, screenings, and lifestyle optimization.",
+        "Proactive healthcare strategies including vaccinations, screenings, obesity/underweight management, and lifestyle optimization.",
       color: "from-blue-500 to-indigo-500",
       details:
-        "Prevention is better than cure. We offer immunizations, cancer screenings, and risk assessments to help you avoid illness before it starts. Our team works with you to develop healthy habits and minimize risk factors, empowering you to take charge of your health.",
+        "Prevention is better than cure. We offer immunizations, cancer screenings, risk assessments, and specialized programs for obesity and underweight management. Our team works with you to develop healthy habits and minimize risk factors, empowering you to take charge of your health.",
     },
     {
       icon: <Users className="w-10 h-10 text-white" />,
@@ -132,7 +132,11 @@ export default function DoctorLandingPage() {
       label: "Success Rate",
       icon: <CheckCircle className="w-8 h-8" />,
     },
-    { number: "24/7", label: "Support", icon: <Clock className="w-8 h-8" /> },
+    {
+      number: "PCOD/PCOS",
+      label: "Specialist",
+      icon: <Heart className="w-8 h-8" />,
+    },
   ];
 
   useEffect(() => {
@@ -770,19 +774,19 @@ export default function DoctorLandingPage() {
               {
                 icon: <Phone className="w-10 h-10" />,
                 title: "Call Us",
-                info: "+91 98765 43210",
-                subtitle: "24/7 Support",
+                info: "9761210506",
+                subtitle: "Naturopathy Physician & Nutritionist",
               },
               {
                 icon: <Mail className="w-10 h-10" />,
                 title: "Email",
-                info: "dr.riya@clinic.com",
+                info: "chelsi112000@gmail.com",
                 subtitle: "Quick Response",
               },
               {
                 icon: <MapPin className="w-10 h-10" />,
                 title: "Visit Us",
-                info: "123 Health Street",
+                info: "Bareli, India",
                 subtitle: "Medical District",
               },
               {
@@ -870,15 +874,19 @@ export default function DoctorLandingPage() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Phone className="w-5 h-5 text-blue-400 mr-3" />
-                  <span className="text-gray-400">+91 98765 43210</span>
+                  <span className="text-gray-400">+91 9761210506</span>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-5 h-5 text-blue-400 mr-3" />
-                  <span className="text-gray-400">dr.riya@clinic.com</span>
+                  <span className="text-gray-400">
+                    <a href="mailto:chelsi112000@gmail.com">
+                      chelsi112000@gmail.com
+                    </a>
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-5 h-5 text-blue-400 mr-3" />
-                  <span className="text-gray-400">123 Health Street</span>
+                  <span className="text-gray-400">Bareli, India</span>
                 </div>
               </div>
             </div>
