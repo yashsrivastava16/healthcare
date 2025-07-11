@@ -22,6 +22,8 @@ import {
   ChevronDown,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
+import ProfilePic from "public/Profile.jpg"; // Adjust path as needed
 
 export default function DoctorLandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -86,7 +88,7 @@ export default function DoctorLandingPage() {
         "Our comprehensive health checkups include a full range of laboratory tests, physical examinations, and advanced screenings. You receive a personalized health report and actionable recommendations to help you stay ahead of potential health issues. Early detection and prevention are at the core of our approach, ensuring your long-term well-being.",
     },
     {
-      icon: <Activity className="w-10 h-10 text-white-500" />,
+      icon: <Activity className="w-10 h-10 text-white" />,
       title: "Chronic Disease Management",
       description:
         "Expert management of diabetes, hypertension, and other chronic conditions with cutting-edge protocols.",
@@ -95,7 +97,7 @@ export default function DoctorLandingPage() {
         "We provide ongoing support and tailored treatment plans for chronic conditions such as diabetes, hypertension, and thyroid disorders. Our multidisciplinary approach combines medication management, lifestyle counseling, and regular monitoring to help you achieve optimal control and a better quality of life.",
     },
     {
-      icon: <Shield className="w-10 h-10 text-white-500" />,
+      icon: <Shield className="w-10 h-10 text-white" />,
       title: "Preventive Medicine",
       description:
         "Proactive healthcare strategies including vaccinations, screenings, and lifestyle optimization.",
@@ -104,7 +106,7 @@ export default function DoctorLandingPage() {
         "Prevention is better than cure. We offer immunizations, cancer screenings, and risk assessments to help you avoid illness before it starts. Our team works with you to develop healthy habits and minimize risk factors, empowering you to take charge of your health.",
     },
     {
-      icon: <Users className="w-10 h-10 text-white-500" />,
+      icon: <Users className="w-10 h-10 text-white" />,
       title: "Family Medicine",
       description:
         "Comprehensive care for all family members, from pediatrics to geriatrics with specialized attention.",
@@ -464,7 +466,13 @@ export default function DoctorLandingPage() {
                 {/* Main doctor image container */}
                 <div className="relative bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 rounded-3xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500">
                   <div className="w-80 h-80 bg-gradient-to-br from-white to-blue-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                    <User className="w-48 h-48 text-blue-600" />
+                    {/* <User className="w-48 h-48 text-blue-600" /> */}
+                    <Image
+                      src="/Profile.jpg"
+                      width={500}
+                      height={500}
+                      alt="profile pic"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent"></div>
                   </div>
 
@@ -522,7 +530,12 @@ export default function DoctorLandingPage() {
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 rounded-3xl p-8 shadow-2xl">
                 <div className="w-full h-96 bg-gradient-to-br from-white to-blue-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  <User className="w-48 h-48 text-blue-600" />
+                  <Image
+                    src="/about.jpg"
+                    width={500}
+                    height={500}
+                    alt="profile pic"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 to-transparent"></div>
                 </div>
               </div>
