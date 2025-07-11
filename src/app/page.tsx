@@ -219,7 +219,7 @@ export default function DoctorLandingPage() {
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-5">
-                <h3 className="text-2xl font-bold mb-4 text-center">
+                <h3 className="text-2xl font-bold mb-4 text-center text-neutral-700">
                   Book Consultation
                 </h3>
                 <input
@@ -229,7 +229,7 @@ export default function DoctorLandingPage() {
                   onChange={handleFormChange}
                   required
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-neutral-500"
                 />
                 <input
                   type="email"
@@ -238,7 +238,7 @@ export default function DoctorLandingPage() {
                   onChange={handleFormChange}
                   required
                   placeholder="Email Address"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-neutral-500"
                 />
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 select-none">
@@ -253,7 +253,7 @@ export default function DoctorLandingPage() {
                     placeholder="Phone Number"
                     pattern="[0-9]{10}"
                     maxLength={10}
-                    className="w-full pl-14 pr-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                    className="w-full pl-14 pr-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-neutral-500"
                     inputMode="numeric"
                     autoComplete="tel-national"
                   />
@@ -261,10 +261,11 @@ export default function DoctorLandingPage() {
                 <input
                   type="datetime-local"
                   name="date"
+                  placeholder="Select Date & Time"
                   value={form.date}
                   onChange={handleFormChange}
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-neutral-500 placeholder:text-neutral-500"
                 />
                 <textarea
                   name="message"
@@ -272,7 +273,7 @@ export default function DoctorLandingPage() {
                   onChange={handleFormChange}
                   rows={3}
                   placeholder="Message (optional)"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-neutral-500"
                 />
                 <button
                   type="submit"
@@ -314,7 +315,7 @@ export default function DoctorLandingPage() {
       )}
       {/* Modal for Service Learn More */}
       {selectedService && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm min-h-screen px-4 sm:px-8">
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-fade-in">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-blue-600"
@@ -545,7 +546,7 @@ export default function DoctorLandingPage() {
                   <div className="text-blue-600 mb-2 flex justify-center">
                     {stat.icon}
                   </div>
-                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <div className="text-xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                     {stat.number}
                   </div>
                   <p className="text-gray-600 font-medium">{stat.label}</p>
@@ -686,7 +687,7 @@ export default function DoctorLandingPage() {
                   >
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-sm md:text-xl font-bold text-gray-900 mb-4 break-words whitespace-normal">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed mb-6">
