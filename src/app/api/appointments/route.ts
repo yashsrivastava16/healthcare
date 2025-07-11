@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
-import path from "path";
-
-const DATA_FILE = path.join(process.cwd(), "appointments.json");
 
 // Helper to read appointments
 async function readAppointments() {
@@ -15,6 +12,8 @@ async function readAppointments() {
 }
 
 // Helper to write appointments
+const DATA_FILE = process.cwd() + "/public/appointments.json";
+
 async function writeAppointments(appointments: any[]) {
   await fs.writeFile(DATA_FILE, JSON.stringify(appointments, null, 2), "utf-8");
 }

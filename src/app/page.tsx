@@ -23,7 +23,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import Image from "next/image";
-import ProfilePic from "public/Profile.jpg"; // Adjust path as needed
 
 export default function DoctorLandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
